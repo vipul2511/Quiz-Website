@@ -1,0 +1,42 @@
+<html>
+    
+            <head>
+                    <script src="https://www.gstatic.com/firebasejs/5.7.2/firebase.js"></script>
+                    <script src="firebase_config.js"></script>
+                  
+                          
+              
+              
+                </head>
+    
+<body>
+        
+    <h2>login</h2>
+    <input id="mailtext" type="text" placeholder="email">
+    <br><br>
+    <input id="passtext" type="text" placeholder="password">
+    <br> <br>
+    <button  onclick="sub_btn()" type="submit" value="submit">submit</button>
+    <script>
+        firebase.initializeApp(config);
+        function sub_btn(){
+            var MailId=document.getElementById("mailtext").value;
+            var PassId=document.getElementById("passtext").value;
+
+             var RootRef=firebase.database().ref();
+             RootRef.orderByChild("email_password").equalTo(MailId+PassId)
+             .once("value",snapshot => {
+    if (snapshot.exists()){
+      console.log("exist");
+    }
+    else{
+        console.log("not exist");
+    }
+});
+
+
+
+        }
+    </script>
+</body>
+</html>

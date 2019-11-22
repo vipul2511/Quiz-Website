@@ -1,0 +1,218 @@
+<html>
+    <head>
+        <title>Quiz</title>
+        <script src="https://www.gstatic.com/firebasejs/5.7.2/firebase.js"></script>
+        <script src="firebase_config.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script>
+           
+        </script>
+    </head>
+    <body>
+        
+        <div id="some-div">
+            
+            <ol type="1">
+                <h4 >  <li id="question" ></li></h4> </ol>
+                <ol type="A">
+                    <form >
+                    <li> <input  type="radio" id="optionone" name="a" ><label id="optone"></label> <br></li>
+                    <li> <input type="radio" id="optionsecond" name="a" ><label id="optsecond"></label> <br></li>
+                   <li>  <input type="radio" id="optionthird" name="a"><label id="optthird"></label> <br> </li> 
+                   <li> <input type="radio" id="optionfour" name="a"><label id="optfour"></label>  <br></li>
+                   </form>
+                     </ol>
+
+                     <button onclick="question_btn()" id="next_btn" type="button" value="next" >NEXT</button>
+             
+        </div>
+        
+            
+        <script>
+                firebase.initializeApp(config);
+
+             
+      
+             question_btn();
+
+
+           
+
+        function question_btn(){
+           
+        
+           var count=-1;
+           var snapshot;
+          
+            var RootRef = firebase.database().ref('Quiz');
+          //  var questionRef=firebase.database().ref('Quiz/').child();
+            var numberofquestion=parseInt(5);
+            var randomIndex=Math.floor(Math.random() * numberofquestion);
+        var randomnumber=randomIndex.toString();
+           console.log(randomIndex);
+            RootRef.orderByChild("no").equalTo(randomnumber).once("child_added", snapshot => {
+                if(snapshot.exists()){
+                   console.log(snapshot.val());
+                  
+              /*   RootRef .orderByKey() // order by chlidren's keys          for getting key of child 
+  .limitToLast(randomIndex.toString()) // only get the last child
+  .once("child_added", function(snapshot) {
+    if(snapshot.exists()){
+    var key = snapshot.key;
+    var val = snapshot.val();
+    console.log(key);
+    console.log(val);
+    console.log(randomIndex);*/
+               
+                    
+                  
+    }                     
+                
+                
+         else{
+                        console.log("not exists");
+                    }
+                    var   Question_quiz=snapshot.child('Question').val();
+              var  originalA=snapshot.child('A').val();
+              var  optionB=snapshot.child('B').val();
+              var  optionC=snapshot.child('C').val();
+            var   optionD=(snapshot.child('D').val());
+           
+
+
+          
+
+
+            //console.log);  
+          /*  var radioA= document.getElementById('optionone').checked;
+                    radioA=document.getElementById('optionone').value;
+                    document.getElementById('optionone').innerHTML = this.value;*/
+                //   document.getElementById("optionone").innerHTML="hello";
+                 // document.getElementsByClassName("optone").innerText="Hello JavaScript!"; 
+                 $(document).ready(function(){
+                    $("#question").html(Question_quiz);       
+           $("#optone").html(originalA);
+           $("#optsecond").html(optionB);
+           $("#optthird").html(optionC);
+           $("#optfour").html(optionD);
+
+            });
+        });
+        }
+
+      
+      
+      /*  var timeLeft = 30;
+    var elem = document.getElementById('some_div');
+    
+    var timerId = setInterval(countdown, 1000);
+    
+    function countdown() {
+      if (timeLeft == 0) {
+        clearTimeout(timerId);
+        doSomething();
+      } else {
+        elem.innerHTML = timeLeft + ' seconds remaining';
+        timeLeft--;
+      }
+      
+    }*/
+       
+
+
+              
+              /*     $('#question').append("<h4>"+Question_quiz+"</h4>");
+                //    $('#optionone').append("<input  type="radio" id="optionone" name="city" value="mumbai" checked>"+originalA);
+                    $('#optionsecond').append("<li>"+optionB+"</li>");
+                    $('#optionthird').append("<input>"+optionC+"</input>");
+                    $('#optionfour').append("<input>"+optionD+"</input>");
+       var list = $('<ul/>'); // create UL
+extractResult(snapshot.val());   // run function and fill the UL with LI's
+$('h2').append(list); // append the completed UL to the body
+
+function extractResult(){     
+    $.each(snapshot.val(), function(index, value) {
+        // create a LI for each itera   tion and append to the UL
+        $('<li />', {text: index + ', ' + value}).appendTo(list);
+        newHTML.push('<span>' + value + '</span>');
+      //  console.log(value);
+    });
+    $(".element").html(newHTML.join(""));
+}*/
+
+
+
+ 
+          //Question_quiz=snapshot.child('Question').val();
+               // originalA=snap.child('A').val();
+                //optionB=snap.child('B').val();
+              //  optionC=snap.child('C').val();
+           //     optionD=snap.child('D').val();
+         //  console.log(Question_quiz);  
+                
+               // snap_holder=snapshot.val();
+               // console.log(snap_holder.Question);
+              //  console.log(snap_holder);
+                
+                
+              //  console.log(Question);
+
+      
+        //    $('#question').append("<p>"++"</p>");
+            
+        /*  RootRef.on("child_added",snap =>{
+           
+             quiz_optionA=new Array();
+             quiz_optionB=new Array();
+             quiz_optionC=new Array();
+             quiz_optionD=new Array();
+                
+                quiz_qus.push(Question);
+            quiz_optionA.push(originalA);
+                quiz_optionB.push(optionB);
+                quiz_optionC.push(optionC);
+                quiz_optionD.push(optionD);
+               count++;
+              // console.log(quiz_qus);  
+            console.log(quiz_qus[3]);
+           //console.log(optionC);
+              // console.log(optionD);
+               
+          //   printquestion(quiz_optionA,count);*/
+          
+
+       
+     /*     return quiz_qus;
+
+         
+        }
+
+        
+    );
+        $('#question').append("<p>"+quiz.quiz_qus[0]+"</p>");
+       /* var list = $('<ul />'); // create UL
+extractResult(quiz_qus);   // run function and fill the UL with LI's
+$('h2').append(list); // append the completed UL to the body
+
+function extractResult(){     
+    $.each(quiz_qus, function(index, value) {
+        // create a LI for each iteration and append to the UL
+        $('<li />', {text: index + ', ' + value}).appendTo(list);
+        newHTML.push('<span>' + value + '</span>');
+        console.log(value);
+    });
+    $(".element").html(newHTML.join(""));
+}*/
+
+         
+              
+    
+
+
+
+      
+            
+            </script>
+        
+    </body>
+</html>
